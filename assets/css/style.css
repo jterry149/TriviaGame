@@ -1,9 +1,20 @@
 /*========== Main Body Properties ==========*/
 body {
-    background: url(../images/halloweenBG.jpeg) no-repeat center fixed;
+    background: url(../images/halloweenBackground.jpg) no-repeat center fixed;
     width:auto;
     height: 100%;
-    color: black;
+    color: white;
     font-family: Arial, Helvetica, sans-serif;
     font: 25px;
-}        
+} 
+/*========== Header Heading Tag Properties ============*/
+.heading {
+    color: orange;
+    font-weight: bold;
+    text-shadow: 2px 2px Black;
+}
+
+/*========== Button Properties =============*/
+#start-btn {
+ 
+}
