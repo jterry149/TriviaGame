@@ -16,5 +16,14 @@ body {
 
 /*========== Button Properties =============*/
 #start-btn {
- 
+    margin: 0 auto;
+    display:flex;
+    text-align:center;
+    border:2px solid black;
+    color: black;
+    background: orange;
+}
+#start-btn:hover {
+    background: black;
+    color:orange;
 }
