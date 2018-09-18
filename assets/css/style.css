@@ -1,4 +1,9 @@
 /*========== Main Body Properties ==========*/
 body {
-    background: blue;
-}
+    background: url(../images/halloweenBG.jpeg) no-repeat center fixed;
+    width:auto;
+    height: 100%;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font: 25px;
+}        

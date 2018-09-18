@@ -15,12 +15,32 @@
 </head>
 <!--================== Main Body Content ======================================-->
 <body>
-<!--================== Main Body Container ==================-->   
+<!--============== Page Header ==========================-->
+<header class="page-header text-center">
+        <h1>Halloween Monsters Trivia Game</h1>
+</header> 
+<!--================== Main Body Container ==================-->  
 <div class="container">
-    <!--============== Page Header ==========================-->
-    <div class="page-header text-center">
-        <h1>Sports Trivia Game</h1>
-    </div> 
+    <button class="btn btn-primary" id="start-btn">Start Game</button>
+    <!--============== Questions Page Setup ==============-->
+        <div id="time"></div>
+        <div id="currentQuestion"></div>
+        <div class="questions"></div>
+        <div class="answerList"></div>
+    
+    <!--============== Answer Page Setup ================-->
+        <div id="message"></div>
+        <div id="correctedAnswerChoice"></div>
+        <div id="imageGif"></div>
+    
+    <!--============== Scoreboard Area ==================-->
+        <div id="finalMessage"></div>
+        <div id="correctAnswers"></div>
+        <div id="wrongAnswers"></div>
+        <div id="unansweredQuestions"></div>
+        <div id="resetBtn"></div>
+
+    
 </div> 
 <!--================== End of Main Body Container ===========-->
 </body>
