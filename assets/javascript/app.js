@@ -7,8 +7,8 @@ var seconds;                // Hold for amount of seconds to answer each ?
 var time;                   // Hold to start the timer
 var answered;               // Boolean variable used if question is answered
 var userSelect;             // Hold user selected guess
-var finalScore;             // Hold score percentage
-
+var totalScore;             // Hold score percentage
+var totalQuestions = 10;    // Hold for total questions
 // Messages outputed to the user in object form during the game play
 var outputMessages = {
 	correct: "Yes, that's right!",
@@ -200,7 +200,7 @@ var resetGame = function()
 	correctAnswer = 0;
 	incorrectAnswer = 0;
     unansweredQuestions = 0;
-    finalScore = 0;
+    totalScore = 0;
 	newQuestions();
 } 
 
@@ -211,10 +211,16 @@ var newQuestions = function()
 	$("#correctedAnswerChoice").empty();
 	$("#imageGif").empty();
     answered = true;
+    // Loop through the questions to make 10 random questions
+    
     
     // working on random generator /////////////////////////////////////////////
 	//var randomQuestion = Math.floor(Math.random() * (triviaQuestions.length));
-	// sets up new questions & answerList for the question using a random variable for 10 questions
+    // sets up new questions & answerList for the question using a random variable for 10 questions
+    ////////////////////////////////////////////////////////////////////////////
+    
+    
+    // Displays the question from the triviaQuestions array
 	$("#currentQuestion").html("Question #"+(currentQuestion + 1)+"/"+ triviaQuestions.length);
     $(".questions").html("<h2>" + triviaQuestions[currentQuestion].question + "</h2>");
         
@@ -226,7 +232,7 @@ var newQuestions = function()
 		    choices.attr({"data-index": i });
 		    choices.addClass("thisChoice");
             $(".answerList").append(choices);
-	    }
+        }
     countTimer();
     
 	// Function on clicking an answer will pause the time and setup answerPage
@@ -308,4 +314,28 @@ var answerPage = function()
 		    currentQuestion++;
 		    setTimeout(newQuestions, 5000);
 	    }	
+}
+
+// Function to display the scoreboard area for the user
+var scoreboard = function()
+{
+    // clear the divs not being used
+	$("#time").empty();
+    $("#message").empty();
+    $(".questions").empty();
+	$("#correctedAnswerChoice").empty();
+    $("#imageGif").empty();
+    
+    // equation to determine percentage user got correctly
+    totalScore = (correctAnswer/ totalQuestions) * 100;
+
+    // The out put of the score and messages to show the user their progress on the trivia game
+	$("#finalMessage").html(outputMessages.finished);
+	$("#correctAnswers").html("Correct Answers: " + correctAnswer);
+	$("#wrongAnswers").html("Wrong Answers: " + incorrectAnswer);
+    $("#unansweredQuestions").html("Unanswered: " + unansweredQuestions);
+    $("#finalScore").html("Total Score: " + totalScore + " percent");
+	$("#resetBtn").addClass("reset");
+	$("#resetBtn").show();
+	$("#resetBtn").html("Start Over?");
 }
