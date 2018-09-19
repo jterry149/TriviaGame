@@ -135,7 +135,7 @@ var triviaQuestions =
 },
 {
     question:"Which of these movies was NOT directed by John Carpenter?",
-    answerList:["The Mist","Halloween","Vampires","Ghosts of Mars","Walking Dead"],
+    answerList:["The Mist","Halloween","Vampires","Ghosts of Mars","The Fog"],
     answer:0
 },
 {
@@ -209,11 +209,14 @@ var newQuestions = function()
     $('#message').empty();
 	$('#correctedAnswerChoice').empty();
 	$('#imageGif').empty();
-	answered = true;
-	
-	//sets up new questions & answerList for the question using a random variable for 10 questions
-	$('#currentQuestion').html('Question #'+(currentQuestion + 1)+'/'+triviaQuestions.length);
+    answered = true;
+    
+    // working on random generator /////////////////////////////////////////////
+	var randomQuestion = Math.floor(Math.random() * (triviaQuestions.length));
+	// sets up new questions & answerList for the question using a random variable for 10 questions
+	$('#currentQuestion').html('Question #'+(currentQuestion + 1)+'/'+ triviaQuestions.length);
     $('.question').html('<h2>' + triviaQuestions[currentQuestion].question + '</h2>');
+        
         // Loop to display the answer choices
         for(var i = 0; i < 5; i++)
         {
@@ -257,4 +260,49 @@ var showCountTimer = function()
 		answered = false;
 		answerPage();
 	}
+}
+
+// Function to setup the answer page for the user
+var answerPage = function()
+{
+    $('#currentQuestion').empty();
+	$('.thisChoice').empty(); //Clears question page
+	$('.question').empty();
+
+    
+    var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
+    
+    var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
+    
+    // Displays the images for the questions
+	$('#imageGif').html('<img src = "assets/images/'+ gifArray[currentQuestion] +'.gif" width = "400px">');
+    
+        // Conditions to check to see correct, incorrect, or unanswered questions
+        if((userSelect == rightAnswerIndex) && (answered == true))
+        {
+		    correctAnswer++;
+		    $('#message').html(messages.correct);
+        } 
+        else if((userSelect != rightAnswerIndex) && (answered == true))
+        {
+		    incorrectAnswer++;
+		    $('#message').html(messages.incorrect);
+		    $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+        } 
+        else
+        {
+		    unanswered++;
+		    $('#message').html(messages.endTime);
+		    $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+		    answered = true;
+	    }
+        // Condtion for the timer 
+	    if(currentQuestion == (triviaQuestions.length-1)){
+		    setTimeout(scoreboard, 5000)
+        } 
+        else
+        {
+		    currentQuestion++;
+		    setTimeout(newQuestion, 5000);
+	    }	
 }
