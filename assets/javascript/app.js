@@ -175,14 +175,14 @@ var triviaQuestions =
 }];
 
 // Event Handler Function to activate the button when clicked and start the game
-$('#startBtn').on('click', function()
+$("#start-btn").on("click", function()
 {
 	$(this).hide();
 	resetGame();
 });
 
 // Event Handler Function to reset the game when clicked
-$('#resetBtn').on('click', function()
+$("#resetBtn").on("click", function()
 {
 	$(this).hide();
 	resetGame();
@@ -191,46 +191,48 @@ $('#resetBtn').on('click', function()
 // Function to reset the game play and initialize the variables
 var resetGame = function()
 {
-	$('#finalMessage').empty();
-	$('#correctAnswers').empty();
-	$('#wrongAnswers').empty();
-    $('#unansweredQuestions').empty();
-    $('#finalScore').empty();
+	$("#finalMessage").empty();
+	$("#correctAnswers").empty();
+	$("#wrongAnswers").empty();
+    $("#unansweredQuestions").empty();
+    $("#finalScore").empty();
 	currentQuestion = 0;
 	correctAnswer = 0;
 	incorrectAnswer = 0;
-	unansweredQuestions = 0;
+    unansweredQuestions = 0;
+    finalScore = 0;
 	newQuestions();
 } 
 
 // Function to setup the random question for game play
 var newQuestions = function()
 {
-    $('#message').empty();
-	$('#correctedAnswerChoice').empty();
-	$('#imageGif').empty();
+    $("#message").empty();
+	$("#correctedAnswerChoice").empty();
+	$("#imageGif").empty();
     answered = true;
     
     // working on random generator /////////////////////////////////////////////
-	var randomQuestion = Math.floor(Math.random() * (triviaQuestions.length));
+	//var randomQuestion = Math.floor(Math.random() * (triviaQuestions.length));
 	// sets up new questions & answerList for the question using a random variable for 10 questions
-	$('#currentQuestion').html('Question #'+(currentQuestion + 1)+'/'+ triviaQuestions.length);
-    $('.question').html('<h2>' + triviaQuestions[currentQuestion].question + '</h2>');
+	$("#currentQuestion").html("Question #"+(currentQuestion + 1)+"/"+ triviaQuestions.length);
+    $(".questions").html("<h2>" + triviaQuestions[currentQuestion].question + "</h2>");
         
         // Loop to display the answer choices
         for(var i = 0; i < 5; i++)
         {
-		    var choices = $('<div>');
+		    var choices = $("<div>");
 		    choices.text(triviaQuestions[currentQuestion].answerList[i]);
-		    choices.attr({'data-index': i });
-		    choices.addClass('thisChoice');
-		    $('.answerList').append(choices);
+		    choices.attr({"data-index": i });
+		    choices.addClass("thisChoice");
+            $(".answerList").append(choices);
 	    }
     countTimer();
     
 	// Function on clicking an answer will pause the time and setup answerPage
-	$('.thisChoice').on('click',function(){
-		userSelect = $(this).data('index');
+    $(".thisChoice").on("click",function()
+    {
+		userSelect = $(this).data("index");
 		clearInterval(time);
 		answerPage();
 	});
@@ -251,7 +253,7 @@ var countTimer = function()
 var showCountTimer = function()
 {
 	seconds--;
-	$('#time').html('<h3>Time Remaining: ' + seconds + '</h3>');
+	$("#time").html("<h3>Time Remaining: " + seconds + "</h3>");
     
     // Condition when seconds reach time expired to display the answer page
     if(seconds < 1)
@@ -265,9 +267,9 @@ var showCountTimer = function()
 // Function to setup the answer page for the user
 var answerPage = function()
 {
-    $('#currentQuestion').empty();
-	$('.thisChoice').empty(); //Clears question page
-	$('.question').empty();
+    $("#currentQuestion").empty();
+	$(".thisChoice").empty(); //Clears question page
+	$(".question").empty();
 
     
     var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
@@ -275,34 +277,35 @@ var answerPage = function()
     var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
     
     // Displays the images for the questions
-	$('#imageGif').html('<img src = "assets/images/'+ gifArray[currentQuestion] +'.gif" width = "400px">');
+	//$("#imageGif").html("<img src = "assets/images/"+ gifArray[currentQuestion] +".gif" width = "400px">");
     
         // Conditions to check to see correct, incorrect, or unanswered questions
         if((userSelect == rightAnswerIndex) && (answered == true))
         {
 		    correctAnswer++;
-		    $('#message').html(messages.correct);
+		    $("#message").html(outputMessages.correct);
         } 
         else if((userSelect != rightAnswerIndex) && (answered == true))
         {
 		    incorrectAnswer++;
-		    $('#message').html(messages.incorrect);
-		    $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+		    $("#message").html(outputMessages.incorrect);
+		    $("#correctedAnswerChoice").html("The correct answer was: " + rightAnswerText);
         } 
         else
         {
-		    unanswered++;
-		    $('#message').html(messages.endTime);
-		    $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+		    unansweredQuestions++;
+		    $("#message").html(outputMessages.endTime);
+		    $("#correctedAnswerChoice").html("The correct answer was: " + rightAnswerText);
 		    answered = true;
 	    }
         // Condtion for the timer 
-	    if(currentQuestion == (triviaQuestions.length-1)){
+        if(currentQuestion == (triviaQuestions.length - 1))
+        {
 		    setTimeout(scoreboard, 5000)
         } 
         else
         {
 		    currentQuestion++;
-		    setTimeout(newQuestion, 5000);
+		    setTimeout(newQuestions, 5000);
 	    }	
 }
