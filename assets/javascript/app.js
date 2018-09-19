@@ -2,14 +2,14 @@
 var currentQuestion;        // Hold current question
 var correctAnswer;          // Hold the correct answer for question
 var incorrectAnswer;        // Hold incorrect answer choices
-var unAnswered;             // Hold unanswered questions 
-var seconds;                // Hold for counting down game
-var time;                   // used for timing questions
-var answered;               // Hold answered question 
+var unansweredQuestions;    // Hold unanswered questions 
+var seconds;                // Hold for amount of seconds to answer each ?
+var time;                   // Hold to start the timer
+var answered;               // Boolean variable used if question is answered
 var userSelect;             // Hold user selected guess
 var finalScore;             // Hold score percentage
 
-// Messages outputed to the user in object form
+// Messages outputed to the user in object form during the game play
 var outputMessages = {
 	correct: "Yes, that's right!",
 	incorrect: "No, that's not it.",
@@ -182,20 +182,79 @@ $('#startBtn').on('click', function()
 });
 
 // Event Handler Function to reset the game when clicked
-$('#resetBtn').on('click', function(){
+$('#resetBtn').on('click', function()
+{
 	$(this).hide();
 	resetGame();
 });
 
-// Function to reset the game play
-function resetGame(){
+// Function to reset the game play and initialize the variables
+var resetGame = function()
+{
 	$('#finalMessage').empty();
 	$('#correctAnswers').empty();
 	$('#wrongAnswers').empty();
-	$('#unansweredQuestions').empty();
+    $('#unansweredQuestions').empty();
+    $('#finalScore').empty();
 	currentQuestion = 0;
 	correctAnswer = 0;
 	incorrectAnswer = 0;
-	unAnswered = 0;
+	unansweredQuestions = 0;
 	newQuestions();
 } 
+
+// Function to setup the random question for game play
+var newQuestions = function()
+{
+    $('#message').empty();
+	$('#correctedAnswerChoice').empty();
+	$('#imageGif').empty();
+	answered = true;
+	
+	//sets up new questions & answerList for the question using a random variable for 10 questions
+	$('#currentQuestion').html('Question #'+(currentQuestion + 1)+'/'+triviaQuestions.length);
+    $('.question').html('<h2>' + triviaQuestions[currentQuestion].question + '</h2>');
+        // Loop to display the answer choices
+        for(var i = 0; i < 5; i++)
+        {
+		    var choices = $('<div>');
+		    choices.text(triviaQuestions[currentQuestion].answerList[i]);
+		    choices.attr({'data-index': i });
+		    choices.addClass('thisChoice');
+		    $('.answerList').append(choices);
+	    }
+    countTimer();
+    
+	// Function on clicking an answer will pause the time and setup answerPage
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+		clearInterval(time);
+		answerPage();
+	});
+}
+
+// Function to setup the countdown timer
+var countTimer = function()
+{
+	seconds = 15; 
+	$('#time').html('<h3>Time Remaining: ' + seconds + '</h3>'); 
+	answered = true;
+    
+    // starts the timer to go down in seconds
+	time = setInterval(showCountTimer, 1000);
+}
+
+// Function to start counting down the timer then show it to the user
+var showCountTimer = function()
+{
+	seconds--;
+	$('#time').html('<h3>Time Remaining: ' + seconds + '</h3>');
+    
+    // Condition when seconds reach time expired to display the answer page
+    if(seconds < 1)
+    {
+		clearInterval(time);
+		answered = false;
+		answerPage();
+	}
+}
