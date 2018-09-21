@@ -211,15 +211,15 @@ var newQuestions = function()
 	$("#correctedAnswerChoice").empty();
 	$("#imageGif").empty();
     answered = true;
+    
     // Loop through the questions to make 10 random questions
-    
-    
     // working on random generator /////////////////////////////////////////////
-	//var randomQuestion = Math.floor(Math.random() * (triviaQuestions.length));
+    // var range = 10;
+    // var questionArray = [];
+	// var randomQuestions = Math.floor(Math.random() * (triviaQuestions.length));
     // sets up new questions & answerList for the question using a random variable for 10 questions
     ////////////////////////////////////////////////////////////////////////////
-    
-    
+
     // Displays the question from the triviaQuestions array
 	$("#currentQuestion").html("Question #"+(currentQuestion + 1)+"/"+ triviaQuestions.length);
     $(".questions").html("<h2>" + triviaQuestions[currentQuestion].question + "</h2>");
