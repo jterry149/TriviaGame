@@ -8,7 +8,7 @@ var time;                   // Hold to start the timer
 var answered;               // Boolean variable used if question is answered
 var userSelect;             // Hold user selected guess
 var totalScore;             // Hold score percentage
-var totalQuestions;         // Hold for total questions
+var totalQuestions = 10;    // Hold for total questions
 
 // Messages outputed to the user in object form during the game play
 var outputMessages = {
@@ -68,7 +68,8 @@ var triviaQuestions =
     question:"Sarah Michelle Gellar portrayed Buffy the Vampire Slayer in the television series. Who played Buffy in the motion picture?",
     answerList:["Sarah Jessica Parker","Molly Ringwald","Kristy Swanson","Julie Benz","Mercedes McNab"],
     answer:2
-},
+}
+/* ,
 {
     question:"Which of the following actors has NEVER played Dracula in a movie?",
     answerList:["Leslie Nielsen","Gary Oldman","Bela Lugosi","Ben Affleck",
@@ -173,7 +174,8 @@ var triviaQuestions =
     question:"Who wrote the novel, “Frankenstein”?",
     answerList:["Mary Shelley","Anne Frank","Stephen King","J. K. Rowling", "Anne Rice"],
     answer:0
-}];
+} */
+];
 
 // Event Handler Function to activate the button when clicked and start the game
 $("#start-btn").on("click", function()
