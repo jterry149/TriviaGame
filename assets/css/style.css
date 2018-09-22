@@ -20,6 +20,9 @@ body {
     text-shadow: 2px 2px Black;
     font-size: 48px;
 }
+#imageGif img {
+    width:400px;
+}
 
 /*========== Button Properties =============*/
 #start-btn {

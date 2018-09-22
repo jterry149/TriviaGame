@@ -218,10 +218,8 @@ var resetGame = function()
 // {
 //         totalQuestions = 10;
 //         var questionArray = []; 
-//         var random
-//         for(random = Math.floor(Math.random()* triviaQuestions.length); random >= 0; random = Math.floor((Math.random()* triviaQuestions.length)))
-//         {
-//           for(i = random; i<questionArray.length; i++)
+//         var randomQuestion = Math.floor(Math.random()) * questionArray.length;
+//           for(i = random; questionArray.length < 10; i++)
 //           {
 //             if(questionArray[i] == random)
 //             {
@@ -242,14 +240,14 @@ var newQuestions = function()
 {
     $("#message").empty();
 	$("#correctedAnswerChoice").empty();
-	//$("#imageGif").empty();
+	$("#imageGif").empty();
     answered = true;
     
     // Displays the question from the triviaQuestions array
 	$("#currentQuestion").html("Question #"+(currentQuestion + 1)+"/"+ triviaQuestions.length);
     $(".questions").html("<h2>" + triviaQuestions[currentQuestion].question + "</h2>");
         
-        // Loop to display the answer choices
+        // Loop to display the answer choices for the individual questions
         for(var i = 0; i < 5; i++)
         {
 		    var choices = $("<div>");
@@ -307,27 +305,33 @@ var answerPage = function()
     
     var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
     
-    // Displays the images for the questions
-	//$("#imageGif").html("<img src = "assets/images/"+ gifArray[currentQuestion] +".gif" width = "400px">");
-    
         // Conditions to check to see correct, incorrect, or unanswered questions
         if((userSelect == rightAnswerIndex) && (answered == true))
         {
 		    correctAnswer++;
-		    $("#message").html(outputMessages.correct);
+            $("#message").html(outputMessages.correct);
+            
+            // Displays the images for the correct answer
+            $('<img src="assets/images/correctAnswer.gif">').appendTo($("#imageGif"));
         } 
         else if((userSelect != rightAnswerIndex) && (answered == true))
         {
 		    incorrectAnswer++;
 		    $("#message").html(outputMessages.incorrect);
-		    $("#correctedAnswerChoice").html("The correct answer was: " + rightAnswerText);
+            $("#correctedAnswerChoice").html("The correct answer was: " + rightAnswerText);
+            
+            // Displays the images for the wrong answer
+            $('<img src="assets/images/wrongAnswer.gif">').appendTo($("#imageGif"));
         } 
         else
         {
 		    unansweredQuestions++;
 		    $("#message").html(outputMessages.endTime);
 		    $("#correctedAnswerChoice").html("The correct answer was: " + rightAnswerText);
-		    answered = true;
+            answered = true;
+            
+            // Displays the images for the out of time 
+            $('<img src="assets/images/timeAnswer.gif">').appendTo($("#imageGif"));
 	    }
         // Condtion for the timer 
         if(currentQuestion == (triviaQuestions.length - 1))
@@ -349,7 +353,7 @@ var scoreboard = function()
     $("#message").empty();
     $(".questions").empty();
 	$("#correctedAnswerChoice").empty();
-    //$("#imageGif").empty();
+    $("#imageGif").empty();
     
     // equation to determine percentage user got correctly
     totalScore = (correctAnswer/ totalQuestions) * 100;
