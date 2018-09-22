@@ -8,7 +8,8 @@ var time;                   // Hold to start the timer
 var answered;               // Boolean variable used if question is answered
 var userSelect;             // Hold user selected guess
 var totalScore;             // Hold score percentage
-var totalQuestions = 10;    // Hold for total questions
+var totalQuestions;         // Hold for total questions
+
 // Messages outputed to the user in object form during the game play
 var outputMessages = {
 	correct: "Yes, that's right!",
@@ -204,22 +205,46 @@ var resetGame = function()
 	newQuestions();
 } 
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+// Wanted to make a random generator of 10 questions not working                /////////////
+// Loop through the questions to make 10 random questions                       /////////////
+// working on random generator                                                  /////////////
+// var questionArray = [];                                                      /////////////
+// var randomQuestions = Math.floor(Math.random() * (triviaQuestions.length);   /////////////
+// var chosenQuestions = triviaQuestions[randomQuestions]                       /////////////
+// sets up new questions & answerList for the question                          ///////////// 
+/////////////////////////////////////////////////////////////////////////////////////////////
+// var randomQuestion = function()
+// {
+//         totalQuestions = 10;
+//         var questionArray = []; 
+//         var random
+//         for(random = Math.floor(Math.random()* triviaQuestions.length); random >= 0; random = Math.floor((Math.random()* triviaQuestions.length)))
+//         {
+//           for(i = random; i<questionArray.length; i++)
+//           {
+//             if(questionArray[i] == random)
+//             {
+// 			  break;
+// 			}
+// 			else{
+// 			  questionArray[questionArray.length] = random;
+// 			  newQuestions(questionArray[i].question);
+// 			  return;
+// 			}
+// 		  }
+// 		}
+// }
+///////////////////////////////////////////////////////////////////////////////////////////
+
 // Function to setup the random question for game play
 var newQuestions = function()
 {
     $("#message").empty();
 	$("#correctedAnswerChoice").empty();
-	$("#imageGif").empty();
+	//$("#imageGif").empty();
     answered = true;
     
-    // Loop through the questions to make 10 random questions
-    // working on random generator /////////////////////////////////////////////
-    // var range = 10;
-    // var questionArray = [];
-	// var randomQuestions = Math.floor(Math.random() * (triviaQuestions.length));
-    // sets up new questions & answerList for the question using a random variable for 10 questions
-    ////////////////////////////////////////////////////////////////////////////
-
     // Displays the question from the triviaQuestions array
 	$("#currentQuestion").html("Question #"+(currentQuestion + 1)+"/"+ triviaQuestions.length);
     $(".questions").html("<h2>" + triviaQuestions[currentQuestion].question + "</h2>");
@@ -324,7 +349,7 @@ var scoreboard = function()
     $("#message").empty();
     $(".questions").empty();
 	$("#correctedAnswerChoice").empty();
-    $("#imageGif").empty();
+    //$("#imageGif").empty();
     
     // equation to determine percentage user got correctly
     totalScore = (correctAnswer/ totalQuestions) * 100;
