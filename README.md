@@ -6,7 +6,7 @@ Press the start button to begin the Trivia Game.
 ![Start Screen](https://github.com/jterry149/TriviaGame/blob/master/assets/screenshots/Start.png)
 <br>
 Select an answer out of the choices.
-![Question Screen](https://github.com/jterry149/TriviaGame/blob/master/assets/screenshots/Start.png)
+![Question Screen](https://github.com/jterry149/TriviaGame/blob/master/assets/screenshots/questions.png)
 <br>
 Answer correct and get a happy dance
 ![Correct Screen](https://github.com/jterry149/TriviaGame/blob/master/assets/screenshots/correct.png)
