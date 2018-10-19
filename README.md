@@ -1,5 +1,21 @@
 # TriviaGame
 
+## Problem
+
+Wanted to make an interactive trivia game using javascript.
+
+## Technologies Used
+
+* Bootstrap CSS
+* HTML
+* CSS
+* Javascript
+* Jquery
+
+## Future Features
+
+1. Make more questions and randomize them without repeating a question
+
 The game consist of 10 questions of halloween themed trivia questions to test your knowledge on the spooky holiday.<br> 
 
 Press the start button to begin the Trivia Game.
