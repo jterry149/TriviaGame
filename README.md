@@ -1,5 +1,6 @@
 # TriviaGame
 
+## How to Play
 The game consist of 10 questions of halloween themed trivia questions to test your knowledge on the spooky holiday.<br> 
 
 Press the start button to begin the Trivia Game.
